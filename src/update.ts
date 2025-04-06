@@ -13,14 +13,29 @@ const updates = async () => {
 //     }
 //    })
 
-const updateMany = await prisma.post.updateMany({
+// const updateMany = await prisma.post.updateMany({
+//     where:{
+//         title:"title2"
+//     },
+//     data:{
+//         published : true,
+//     }
+// })
+const upsertData = await prisma.post.upsert({
     where:{
-        title:"title2"
+        id:14
     },
-    data:{
-        published : true,
+    update:{
+        title:"a",
+        content:"updated content",
+        authorName:"updated author"
+    },
+    create:{
+        title:"this is created data",
+        content:"created content",
+        authorName:"created author"
     }
 })
-console.log(updateMany);
+console.log(upsertData);
 }
 updates();
