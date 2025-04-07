@@ -14,6 +14,7 @@ model Post {
   content String
   published Boolean @default(false)
   authorId Int
+  author User @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@map("posts")
@@ -24,13 +25,16 @@ model User {
   userName String @unique
   email String 
   role UserRole
+  profile Profile? // one to one relation
+  posts Post[] // one to many relation
   @@map("users")
 
 }
 model Profile {
   id Int @id @default(autoincrement())
   bio String?
-  userId Int
+  userId Int @unique
+  user User @relation(fields: [userId],references: [id])
   @@map("profiles")
 }
 model Category {
