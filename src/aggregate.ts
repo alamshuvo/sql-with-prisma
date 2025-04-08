@@ -7,6 +7,17 @@ const avgAge = async () => {
             age:true
         }
     })
-    console.log(avgAge);
+
+    const sumOfAge = await prisma.user.aggregate({
+        _sum:{
+            age:true
+        }
+    })
+    const countOfAge = await prisma.user.aggregate({
+        _count:{
+            age:true
+        }
+    })
+    console.log(countOfAge);
 }
 avgAge()
