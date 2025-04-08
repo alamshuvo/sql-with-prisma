@@ -18,6 +18,12 @@ const avgAge = async () => {
             age:true
         }
     })
-    console.log(countOfAge);
+
+    const maxAge = await prisma.user.aggregate({
+        _max:{
+            age:true
+        }
+    })
+    console.log(maxAge);
 }
 avgAge()
